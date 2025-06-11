@@ -47,19 +47,20 @@
             display: inline-block;
         }
 
-        /* Dropdown */
+        /* Submenu-Stil für das seitliche Ausklappen */
         .dropdown .dropdown-content {
             display: none;
             position: absolute;
             background-color: #444;
             min-width: 180px;
-            top: 100%;
-            left: 0;
+            left: 100%;
+            top: 0;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             z-index: 2000;
+            white-space: nowrap;
         }
 
-        .dropdown:hover > .dropdown-content {
+        .dropdown:hover .dropdown-content {
             display: block;
         }
 
@@ -189,12 +190,12 @@
 
     <!-- Navigation -->
     <nav>
-        <div class="menu-item"><a href="index.html">Start</a></div>
+        <div class="menu-item"><a href="index.html" onclick="scrollToSection('startseite', event)">Start</a></div>
         <div class="menu-item"><a href="team.html">Unser Team</a></div>
         <div class="menu-item"><a href="kontakt.html">Kontakt</a></div>
 
         <div class="menu-item dropdown">
-            <a href="#">Grundlagen</a>
+            <a href="javascript:void(0);">Grundlagen</a>
             <div class="dropdown-content">
                 <div class="dropdown-item"><a href="javascript:void(0);" onclick="scrollToSection('kreissatzung', event)">Kreissatzung</a></div>
                 <div class="dropdown-item"><a href="javascript:void(0);" onclick="scrollToSection('landessatzung', event)">Landessatzung</a></div>
@@ -248,4 +249,4 @@
 
         <section id="schiedsordnung">
             <h2>Schiedsordnung</h2>
-            <iframe src="Satzungen/Schiedsordnung.pdf" width="
+            <iframe src="Satzungen/Sch

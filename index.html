@@ -147,10 +147,13 @@
       event.preventDefault();  // Verhindert das normale Verhalten des Links
       const section = document.getElementById(sectionId);
 
+      // Verstecke alle Abschnitte
+      document.querySelectorAll('main section').forEach(sec => {
+        sec.style.display = 'none';
+      });
+
+      // Zeige den gewünschten Abschnitt an
       if (section) {
-        document.querySelectorAll('main section').forEach(sec => {
-          sec.style.display = 'none';
-        });
         section.style.display = 'block';
         section.scrollIntoView({ behavior: 'smooth' });
       }
@@ -162,7 +165,7 @@
 
   <header>
     <div>
-      <img src="Bilder/AfD.png" alt="AfD Logo" style="height: 50px;">
+      <img src="AfD.png" alt="AfD Logo" style="height: 50px;">
       <h1>AfD-Fraktion im Stadtrat Pirmasens</h1>
       <p>Wir setzen uns für Ihre Interessen ein!</p>
     </div>

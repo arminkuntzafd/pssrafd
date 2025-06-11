@@ -47,7 +47,7 @@
             display: inline-block;
         }
 
-        /* Submenu-Stil für das seitliche Ausklappen */
+        /* Submenu-Stil für das seitliche Ausklappen (nächste Ebene) */
         .dropdown .dropdown-content {
             display: none;
             position: absolute;
@@ -60,6 +60,7 @@
             white-space: nowrap;
         }
 
+        /* Zeige das Dropdown, wenn das Element überfahren wird */
         .dropdown:hover .dropdown-content {
             display: block;
         }
@@ -114,8 +115,7 @@
                 margin: 5px 0;
             }
 
-            .dropdown .dropdown-content,
-            .dropdown-item .dropdown-content {
+            .dropdown .dropdown-content {
                 position: static;
                 margin-left: 0;
                 box-shadow: none;
@@ -123,8 +123,7 @@
                 width: 100%;
             }
 
-            .dropdown:hover > .dropdown-content,
-            .dropdown-item:hover > .dropdown-content {
+            .dropdown:hover > .dropdown-content {
                 display: block;
             }
         }
@@ -183,7 +182,7 @@
             </div>
             <div class="header-text">
                 <h1>AfD-Fraktion im Stadtrat Pirmasens</h1>
-                <p>Wir setzen uns für ihre Interessen ein!</p>
+                <p>Wir setzen uns für Ihre Interessen ein!</p>
             </div>
         </div>
     </header>
@@ -249,4 +248,8 @@
 
         <section id="schiedsordnung">
             <h2>Schiedsordnung</h2>
-            <iframe src="Satzungen/Sch
+            <iframe src="Satzungen/Schiedsordnung.pdf" width="100%" height="600px" style="border:none;"></iframe>
+        </section>
+    </main>
+
+   

@@ -77,7 +77,7 @@
     main {
       flex-grow: 1;
       padding: 20px;
-      max-width: 100%; /* Verhindert das zu breite Layout */
+      max-width: 100%;
       box-sizing: border-box;
     }
 
@@ -142,23 +142,6 @@
       }
     }
   </style>
-  <script>
-    function scrollToSection(sectionId, event) {
-      event.preventDefault();  // Verhindert das normale Verhalten des Links
-      const section = document.getElementById(sectionId);
-
-      // Verstecke alle Abschnitte
-      document.querySelectorAll('main section').forEach(sec => {
-        sec.style.display = 'none';
-      });
-
-      // Zeige den gewünschten Abschnitt an
-      if (section) {
-        section.style.display = 'block';
-        section.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-  </script>
 </head>
 
 <body>
@@ -172,24 +155,24 @@
   </header>
 
   <nav>
-    <div class="menu-item"><a href="#" onclick="scrollToSection('startseite', event)">Start</a></div>
+    <div class="menu-item"><a href="#startseite">Start</a></div>
     <div class="menu-item"><a href="team.html">Unser Team</a></div>
     <div class="menu-item"><a href="kontakt.html">Kontakt</a></div>
 
     <div class="menu-item dropdown">
       <a href="#">Grundlagen</a>
       <div class="dropdown-content">
-        <div class="dropdown-item"><a href="#" onclick="scrollToSection('kreissatzung', event)">Kreissatzung</a></div>
-        <div class="dropdown-item"><a href="#" onclick="scrollToSection('landessatzung', event)">Landessatzung</a></div>
+        <div class="dropdown-item"><a href="#kreissatzung">Kreissatzung</a></div>
+        <div class="dropdown-item"><a href="#landessatzung">Landessatzung</a></div>
         <div class="dropdown-item dropdown">
           <a href="#">Bund</a>
           <div class="dropdown-content">
-            <div class="dropdown-item"><a href="#" onclick="scrollToSection('bundessatzung', event)">Bundessatzung</a></div>
+            <div class="dropdown-item"><a href="#bundessatzung">Bundessatzung</a></div>
             <div class="dropdown-item dropdown">
               <a href="#">Ordnungen</a>
               <div class="dropdown-content">
-                <div class="dropdown-item"><a href="#" onclick="scrollToSection('finanzordnung', event)">Finanzordnung</a></div>
-                <div class="dropdown-item"><a href="#" onclick="scrollToSection('schiedsordnung', event)">Schiedsordnung</a></div>
+                <div class="dropdown-item"><a href="#finanzordnung">Finanzordnung</a></div>
+                <div class="dropdown-item"><a href="#schiedsordnung">Schiedsordnung</a></div>
               </div>
             </div>
           </div>
@@ -200,7 +183,7 @@
     <div class="menu-item dropdown">
       <a href="#">Info</a>
       <div class="dropdown-content">
-        <div class="dropdown-item"><a href="#" onclick="scrollToSection('einschulungen', event)">Einschulungen</a></div>
+        <div class="dropdown-item"><a href="#einschulungen">Einschulungen</a></div>
       </div>
     </div>
 

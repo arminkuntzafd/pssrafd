@@ -71,6 +71,7 @@
 
         section {
             margin-bottom: 30px;
+            padding: 20px;
         }
 
         iframe {
@@ -122,6 +123,32 @@
             }
         }
     </style>
+
+    <script>
+        // Flag, das angibt, ob der Benutzer sich bereits in einer Section befindet
+        let isInSection = false;
+
+        // Funktion, um zu den jeweiligen Sectionen zu scrollen
+        function scrollToSection(sectionId, event) {
+            // Wenn der Benutzer bereits in einer Section ist, stoppen wir das Event
+            if (isInSection) {
+                event.preventDefault();
+                return;
+            }
+
+            // Den Scroll-Vorgang zu der Section auslösen
+            const section = document.getElementById(sectionId);
+            section.scrollIntoView({ behavior: 'smooth' });
+
+            // Den Zustand setzen, dass der Benutzer sich nun in einer Section befindet
+            isInSection = true;
+
+            // Nach dem Scrollen setzen wir den Zustand zurück, damit weitere Scroll-Vorgänge möglich sind
+            setTimeout(() => {
+                isInSection = false;
+            }, 1000); // Setzt isInSection nach 1 Sekunde zurück, du kannst diesen Wert anpassen
+        }
+    </script>
 </head>
 
 <body>
@@ -150,17 +177,17 @@
         <div class="menu-item dropdown">
             <a href="#">Grundlagen</a>
             <div class="dropdown-content">
-                <div class="dropdown-item"><a href="Satzungen/Satzung_Kreis.pdf">Kreissatzung</a></div>
-                <div class="dropdown-item"><a href="#landessatzung">Landessatzung</a></div>
+                <div class="dropdown-item"><a href="javascript:void(0);" onclick="scrollToSection('kreissatzung', event)">Kreissatzung</a></div>
+                <div class="dropdown-item"><a href="javascript:void(0);" onclick="scrollToSection('landessatzung', event)">Landessatzung</a></div>
                 <div class="dropdown-item dropdown">
-                    <a href="#">Bund</a>
+                    <a href="javascript:void(0);">Bund</a>
                     <div class="dropdown-content">
-                        <div class="dropdown-item"><a href="#bundessatzung">Bundessatzung</a></div>
+                        <div class="dropdown-item"><a href="javascript:void(0);" onclick="scrollToSection('bundessatzung', event)">Bundessatzung</a></div>
                         <div class="dropdown-item dropdown">
-                            <a href="#">Ordnungen</a>
+                            <a href="javascript:void(0);">Ordnungen</a>
                             <div class="dropdown-content">
-                                <div class="dropdown-item"><a href="#finanzordnung">Finanzordnung</a></div>
-                                <div class="dropdown-item"><a href="#schiedsordnung">Schiedsordnung</a></div>
+                                <div class="dropdown-item"><a href="javascript:void(0);" onclick="scrollToSection('finanzordnung', event)">Finanzordnung</a></div>
+                                <div class="dropdown-item"><a href="javascript:void(0);" onclick="scrollToSection('schiedsordnung', event)">Schiedsordnung</a></div>
                             </div>
                         </div>
                     </div>

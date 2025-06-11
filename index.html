@@ -4,13 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AfD-Fraktion im Stadtrat Pirmasens</title>
-
   <style>
     html, body {
-      height: 100%;
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
+      height: 100%;
       display: flex;
       flex-direction: column;
     }
@@ -24,41 +23,33 @@
 
     nav {
       display: flex;
-      justify-content: flex-start;
-      align-items: center;
+      justify-content: center;
       background-color: #333;
       padding: 10px;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      gap: 15px;
-      scrollbar-width: thin;
+      position: relative;
+      flex-wrap: wrap;
     }
 
     .menu-item {
       position: relative;
+      margin: 0 15px;
       white-space: nowrap;
     }
 
     .menu-item a {
       color: white;
       text-decoration: none;
-      padding: 10px 15px;
+      padding: 10px;
       display: inline-block;
-    }
-
-    .menu-item a:hover {
-      background-color: #555;
     }
 
     .dropdown .dropdown-content {
       display: none;
       position: absolute;
-      background-color: #444;
-      min-width: 180px;
       top: 100%;
       left: 0;
-      z-index: 2000;
-      white-space: nowrap;
+      background-color: #444;
+      min-width: 180px;
       box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     }
 
@@ -75,6 +66,8 @@
       position: absolute;
       top: 0;
       left: 100%;
+      background-color: #444;
+      min-width: 180px;
     }
 
     .dropdown-item:hover > .dropdown-content {
@@ -88,7 +81,7 @@
 
     section {
       display: none;
-      margin-bottom: 30px;
+      padding: 20px;
     }
 
     #startseite {
@@ -106,7 +99,6 @@
       color: white;
       text-align: center;
       padding: 20px;
-      margin-top: auto;
     }
 
     footer a {
@@ -121,42 +113,49 @@
     @media (max-width: 768px) {
       nav {
         flex-direction: column;
-        align-items: flex-start;
+      }
+
+      .menu-item {
+        margin: 5px 0;
       }
 
       .dropdown .dropdown-content,
       .dropdown-item .dropdown-content {
         position: static;
+        background-color: #444;
         box-shadow: none;
         width: 100%;
       }
+
+      .dropdown:hover > .dropdown-content,
+      .dropdown-item:hover > .dropdown-content {
+        display: block;
+      }
     }
   </style>
-
   <script>
     function scrollToSection(sectionId, event) {
       event.preventDefault();
-
-      document.querySelectorAll('main section').forEach(sec => {
-        sec.style.display = 'none';
-      });
-
-      const target = document.getElementById(sectionId);
-      if (target) {
-        target.style.display = 'block';
-        target.scrollIntoView({ behavior: 'smooth' });
+      const section = document.getElementById(sectionId);
+      if (section) {
+        document.querySelectorAll('main section').forEach(sec => {
+          sec.style.display = 'none';
+        });
+        section.style.display = 'block';
+        section.scrollIntoView({ behavior: 'smooth' });
       }
     }
   </script>
 </head>
+
 <body>
 
   <header>
-    <div class="logo-container">
-      <a href="index.html"><img src="AfD.png" alt="AfD Logo" style="height: 50px;"></a>
+    <div>
+      <img src="AfD.png" alt="AfD Logo" style="height: 50px;">
+      <h1>AfD-Fraktion im Stadtrat Pirmasens</h1>
+      <p>Wir setzen uns für Ihre Interessen ein!</p>
     </div>
-    <h1>AfD-Fraktion im Stadtrat Pirmasens</h1>
-    <p>Wir setzen uns für Ihre Interessen ein!</p>
   </header>
 
   <nav>
@@ -185,14 +184,20 @@
       </div>
     </div>
 
-    <div class="menu-item"><a href="#" onclick="scrollToSection('einschulungen', event)">Einschulungen</a></div>
+    <div class="menu-item dropdown">
+      <a href="#">Info</a>
+      <div class="dropdown-content">
+        <div class="dropdown-item"><a href="#" onclick="scrollToSection('einschulungen', event)">Einschulungen</a></div>
+      </div>
+    </div>
+
     <div class="menu-item"><a href="impressum.html">Impressum</a></div>
   </nav>
 
   <main>
     <section id="startseite">
       <h2>Willkommen</h2>
-      <p>Willkommen auf der Webseite der AfD-Fraktion im Stadtrat Pirmasens.</p>
+      <p>Dies ist die Startseite der AfD-Fraktion im Stadtrat Pirmasens.</p>
     </section>
 
     <section id="kreissatzung">
@@ -216,7 +221,7 @@
     </section>
 
     <section id="einschulungen">
-      <iframe src="20240822%20Einschulungen.pdf"></iframe>
+      <iframe src="20240822 Einschulungen.pdf"></iframe>
     </section>
   </main>
 

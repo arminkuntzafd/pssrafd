@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AfD-Fraktion im Stadtrat Pirmasens</title>
+
   <style>
     html, body {
       height: 100%;
@@ -24,35 +24,42 @@
 
     nav {
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
+      align-items: center;
       background-color: #333;
       padding: 10px;
-      position: relative;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: 15px;
+      scrollbar-width: thin;
     }
 
     .menu-item {
       position: relative;
-      margin: 0 15px;
       white-space: nowrap;
     }
 
     .menu-item a {
       color: white;
       text-decoration: none;
-      padding: 10px;
+      padding: 10px 15px;
       display: inline-block;
     }
 
-    .dropdown-content {
+    .menu-item a:hover {
+      background-color: #555;
+    }
+
+    .dropdown .dropdown-content {
       display: none;
       position: absolute;
       background-color: #444;
       min-width: 180px;
       top: 100%;
       left: 0;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
       z-index: 2000;
+      white-space: nowrap;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     }
 
     .dropdown:hover > .dropdown-content {
@@ -64,9 +71,10 @@
     }
 
     .dropdown-item .dropdown-content {
+      display: none;
+      position: absolute;
       top: 0;
       left: 100%;
-      display: none;
     }
 
     .dropdown-item:hover > .dropdown-content {
@@ -79,9 +87,8 @@
     }
 
     section {
-      margin-bottom: 30px;
-      padding: 20px;
       display: none;
+      margin-bottom: 30px;
     }
 
     #startseite {
@@ -114,51 +121,42 @@
     @media (max-width: 768px) {
       nav {
         flex-direction: column;
+        align-items: flex-start;
       }
 
-      .menu-item {
-        margin: 5px 0;
-      }
-
-      .dropdown-content,
+      .dropdown .dropdown-content,
       .dropdown-item .dropdown-content {
         position: static;
-        margin-left: 0;
         box-shadow: none;
-        background-color: #444;
         width: 100%;
-      }
-
-      .dropdown:hover > .dropdown-content,
-      .dropdown-item:hover > .dropdown-content {
-        display: block;
       }
     }
   </style>
+
   <script>
     function scrollToSection(sectionId, event) {
       event.preventDefault();
-      const section = document.getElementById(sectionId);
-      const allSections = document.querySelectorAll("main section");
-      allSections.forEach(s => s.style.display = "none");
-      if (section) section.style.display = "block";
+
+      document.querySelectorAll('main section').forEach(sec => {
+        sec.style.display = 'none';
+      });
+
+      const target = document.getElementById(sectionId);
+      if (target) {
+        target.style.display = 'block';
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   </script>
 </head>
-
 <body>
+
   <header>
-    <div class="header-content">
-      <div class="logo-container">
-        <a href="index.html">
-          <img src="AfD.png" alt="AfD Logo" id="logo" style="height: 50px;" />
-        </a>
-      </div>
-      <div class="header-text">
-        <h1>AfD-Fraktion im Stadtrat Pirmasens</h1>
-        <p>Wir setzen uns für Ihre Interessen ein!</p>
-      </div>
+    <div class="logo-container">
+      <a href="index.html"><img src="AfD.png" alt="AfD Logo" style="height: 50px;"></a>
     </div>
+    <h1>AfD-Fraktion im Stadtrat Pirmasens</h1>
+    <p>Wir setzen uns für Ihre Interessen ein!</p>
   </header>
 
   <nav>
@@ -180,31 +178,21 @@
               <div class="dropdown-content">
                 <div class="dropdown-item"><a href="#" onclick="scrollToSection('finanzordnung', event)">Finanzordnung</a></div>
                 <div class="dropdown-item"><a href="#" onclick="scrollToSection('schiedsordnung', event)">Schiedsordnung</a></div>
-                 <div class="dropdown-item"><a href="#" onclick="scrollToSection('wahlordnung', event)">Wahlordnung</a></div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-<div class="menu-item dropdown">
-      <a href="#">Anfragen</a>
-      <div class="dropdown-content">
-               <div class="dropdown-item dropdown">
-          <a href="einschulungen">20240822 Einschulungen</a>
-          <div class="dropdown-content">
-            <div class="dropdown-item"><a href="#" onclick="scrollToSection('einschulungenantwort', event)">Antwort</a></div         
-          </div>
-        </div>
-      </div>
-    </div>
+
+    <div class="menu-item"><a href="#" onclick="scrollToSection('einschulungen', event)">Einschulungen</a></div>
     <div class="menu-item"><a href="impressum.html">Impressum</a></div>
   </nav>
 
   <main>
     <section id="startseite">
       <h2>Willkommen</h2>
-      <p>Willkommen auf der offiziellen Webseite der AfD-Fraktion im Stadtrat Pirmasens.</p>
+      <p>Willkommen auf der Webseite der AfD-Fraktion im Stadtrat Pirmasens.</p>
     </section>
 
     <section id="kreissatzung">
@@ -220,20 +208,15 @@
     </section>
 
     <section id="finanzordnung">
-      <iframe src="Satzungen/FBO.pdf"></iframe>
+      <iframe src="Satzungen/Finanzordnung.pdf"></iframe>
     </section>
 
     <section id="schiedsordnung">
-      <iframe src="Satzungen/sgo.pdf"></iframe>
+      <iframe src="Satzungen/Schiedsordnung.pdf"></iframe>
     </section>
-    <section id="wahlordnung">
-      <iframe src="Satzungen/wo.pdf"></iframe>
-    </section>
-  <section id="einschulungen">
-      <iframe src="Anfragen/20240822 Einschulungen.pdf"></iframe>
-    </section>
-  <section id="einschulungenantwort">
-      <iframe src="Anfragen/20240822 EinschulungenA.pdf"></iframe>
+
+    <section id="einschulungen">
+      <iframe src="20240822%20Einschulungen.pdf"></iframe>
     </section>
   </main>
 
@@ -241,5 +224,6 @@
     <p>&copy; 2025 AfD-Fraktion im Stadtrat Pirmasens. Alle Rechte vorbehalten.</p>
     <p><a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a></p>
   </footer>
+
 </body>
 </html>

@@ -77,11 +77,17 @@
     main {
       flex-grow: 1;
       padding: 20px;
+      max-width: 100%; /* Verhindert das zu breite Layout */
+      box-sizing: border-box;
     }
 
     section {
       display: none;
       padding: 20px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #f9f9f9;
     }
 
     #startseite {
@@ -92,6 +98,8 @@
       width: 100%;
       height: 600px;
       border: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     footer {
@@ -99,6 +107,7 @@
       color: white;
       text-align: center;
       padding: 20px;
+      margin-top: auto;
     }
 
     footer a {
@@ -135,8 +144,9 @@
   </style>
   <script>
     function scrollToSection(sectionId, event) {
-      event.preventDefault();
+      event.preventDefault();  // Verhindert das normale Verhalten des Links
       const section = document.getElementById(sectionId);
+
       if (section) {
         document.querySelectorAll('main section').forEach(sec => {
           sec.style.display = 'none';
@@ -201,26 +211,32 @@
     </section>
 
     <section id="kreissatzung">
+      <h2>Kreissatzung</h2>
       <iframe src="Satzungen/Satzung_Kreis.pdf"></iframe>
     </section>
 
     <section id="landessatzung">
+      <h2>Landessatzung</h2>
       <iframe src="Satzungen/Satzung_Land.pdf"></iframe>
     </section>
 
     <section id="bundessatzung">
+      <h2>Bundessatzung</h2>
       <iframe src="Satzungen/Satzung_Bund.pdf"></iframe>
     </section>
 
     <section id="finanzordnung">
+      <h2>Finanzordnung</h2>
       <iframe src="Satzungen/Finanzordnung.pdf"></iframe>
     </section>
 
     <section id="schiedsordnung">
+      <h2>Schiedsordnung</h2>
       <iframe src="Satzungen/Schiedsordnung.pdf"></iframe>
     </section>
 
     <section id="einschulungen">
+      <h2>Einschulungen</h2>
       <iframe src="20240822 Einschulungen.pdf"></iframe>
     </section>
   </main>

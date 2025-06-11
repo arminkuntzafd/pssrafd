@@ -208,25 +208,23 @@
       </div>
     </div>
 
-    <div class="menu-item dropdown">
-      <a href="#">Anfragen</a>
+   <div class="menu-item dropdown">
+  <a href="#">Anfragen</a>
+  <div class="dropdown-content">
+    <div class="dropdown-item dropdown">
+      <a onclick="showSection('einschulungen')">Einschulungen A</a>
       <div class="dropdown-content">
-        <div class="dropdown-item dropdown">
-          <a href="#">Einschulungen A</a>
-          <div class="dropdown-content">
-            <div class="dropdown-item"><a onclick="showSection('einschulungen')">Einschulungen</a></div>
-            <div class="dropdown-item"><a onclick="showSection('antwort1')">Antwort</a></div>
-          </div>
-        </div>
-        <div class="dropdown-item dropdown">
-          <a href="#">Einschulungen B</a>
-          <div class="dropdown-content">
-            <div class="dropdown-item"><a onclick="showSection('einschulungen')">Einschulungen</a></div>
-            <div class="dropdown-item"><a onclick="showSection('antwort1')">Antwort</a></div>
-          </div>
-        </div>
+        <div class="dropdown-item"><a onclick="showSection('antwort1')">Antwort</a></div>
       </div>
     </div>
+    <div class="dropdown-item dropdown">
+      <a onclick="showSection('einschulungen')">Einschulungen B</a>
+      <div class="dropdown-content">
+        <div class="dropdown-item"><a onclick="showSection('antwort1')">Antwort</a></div>
+      </div>
+    </div>
+  </div>
+</div>
 
     <div class="menu-item"><a href="impressum.html">Impressum</a></div>
   </nav>

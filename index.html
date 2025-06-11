@@ -13,7 +13,7 @@
     }
 
     body {
-      padding-top: 160px; /* Header + Nav */
+      padding-top: 160px;
     }
 
     header {
@@ -106,7 +106,7 @@
 
     section {
       display: none;
-      padding: 40px 20px 20px 20px;
+      padding: 40px 20px 20px;
       margin-bottom: 20px;
       border: 1px solid #ddd;
       border-radius: 8px;
@@ -272,8 +272,18 @@
 
   <script>
     function showSection(sectionId) {
-      document.querySelectorAll('main section').forEach(sec => sec.style.display = 'none');
+      // Alle Sektionen ausblenden
+      document.querySelectorAll('main section').forEach(sec => {
+        sec.style.display = 'none';
+      });
+
+      // Gewünschte Sektion einblenden
       const section = document.getElementById(sectionId);
       if (section) {
+        section.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
   </script>
-  </html>
+</body>
+</html>

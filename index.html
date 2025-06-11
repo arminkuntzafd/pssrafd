@@ -96,7 +96,6 @@
     section {
       display: none;
       padding: 20px;
-      margin-bottom: 20px;
       border: 1px solid #ddd;
       border-radius: 8px;
       background-color: #f9f9f9;
@@ -111,7 +110,7 @@
       height: 600px;
       border: none;
       border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
 
     footer {
@@ -156,7 +155,6 @@
 </head>
 
 <body>
-
   <header>
     <div class="logo-container">
       <img src="Bilder/AfD.png" alt="AfD Logo" style="height: 50px;">
@@ -197,9 +195,8 @@
       <a href="#">Anfragen</a>
       <div class="dropdown-content">
         <div class="dropdown-item dropdown">
-          <a href="#">Einschulungen</a>
+          <a href="javascript:void(0);" onclick="showSection('einschulungen')">Einschulungen</a>
           <div class="dropdown-content">
-            <div class="dropdown-item"><a href="javascript:void(0);" onclick="showSection('einschulungen')">Dokument</a></div>
             <div class="dropdown-item"><a href="javascript:void(0);" onclick="showSection('antwort1')">Antwort</a></div>
           </div>
         </div>
@@ -258,13 +255,9 @@
 
   <script>
     function showSection(sectionId) {
-      document.querySelectorAll('main section').forEach(section => {
-        section.style.display = 'none';
-      });
+      document.querySelectorAll('main section').forEach(sec => sec.style.display = 'none');
       const section = document.getElementById(sectionId);
-      if (section) {
-        section.style.display = 'block';
-      }
+      if (section) section.style.display = 'block';
     }
   </script>
 </body>

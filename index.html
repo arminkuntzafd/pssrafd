@@ -155,24 +155,24 @@
   </header>
 
   <nav>
-    <div class="menu-item"><a href="#startseite">Start</a></div>
+    <div class="menu-item"><a href="javascript:void(0);" onclick="showSection('startseite')">Start</a></div>
     <div class="menu-item"><a href="team.html">Unser Team</a></div>
     <div class="menu-item"><a href="kontakt.html">Kontakt</a></div>
 
     <div class="menu-item dropdown">
       <a href="#">Grundlagen</a>
       <div class="dropdown-content">
-        <div class="dropdown-item"><a href="#kreissatzung">Kreissatzung</a></div>
-        <div class="dropdown-item"><a href="#landessatzung">Landessatzung</a></div>
+        <div class="dropdown-item"><a href="javascript:void(0);" onclick="showSection('kreissatzung')">Kreissatzung</a></div>
+        <div class="dropdown-item"><a href="javascript:void(0);" onclick="showSection('landessatzung')">Landessatzung</a></div>
         <div class="dropdown-item dropdown">
           <a href="#">Bund</a>
           <div class="dropdown-content">
-            <div class="dropdown-item"><a href="#bundessatzung">Bundessatzung</a></div>
+            <div class="dropdown-item"><a href="javascript:void(0);" onclick="showSection('bundessatzung')">Bundessatzung</a></div>
             <div class="dropdown-item dropdown">
               <a href="#">Ordnungen</a>
               <div class="dropdown-content">
-                <div class="dropdown-item"><a href="#finanzordnung">Finanzordnung</a></div>
-                <div class="dropdown-item"><a href="#schiedsordnung">Schiedsordnung</a></div>
+                <div class="dropdown-item"><a href="javascript:void(0);" onclick="showSection('finanzordnung')">Finanzordnung</a></div>
+                <div class="dropdown-item"><a href="javascript:void(0);" onclick="showSection('schiedsordnung')">Schiedsordnung</a></div>
               </div>
             </div>
           </div>
@@ -183,7 +183,7 @@
     <div class="menu-item dropdown">
       <a href="#">Info</a>
       <div class="dropdown-content">
-        <div class="dropdown-item"><a href="#einschulungen">Einschulungen</a></div>
+        <div class="dropdown-item"><a href="javascript:void(0);" onclick="showSection('einschulungen')">Einschulungen</a></div>
       </div>
     </div>
 
@@ -231,6 +231,20 @@
     <p>&copy; 2025 AfD-Fraktion im Stadtrat Pirmasens. Alle Rechte vorbehalten.</p>
     <p><a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a></p>
   </footer>
+
+  <script>
+    // Funktion, die die Sektionen anzeigt
+    function showSection(sectionId) {
+      const sections = document.querySelectorAll('main section');
+      sections.forEach(section => {
+        section.style.display = 'none';  // Alle Sektionen ausblenden
+      });
+      
+      // Zeigt die gewünschte Sektion an
+      const section = document.getElementById(sectionId);
+      section.style.display = 'block';
+    }
+  </script>
 
 </body>
 </html>

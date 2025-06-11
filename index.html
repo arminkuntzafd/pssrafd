@@ -72,6 +72,11 @@
         section {
             margin-bottom: 30px;
             padding: 20px;
+            display: none; /* Verhindert das sofortige Anzeigen der Sections */
+        }
+
+        #startseite {
+            display: block; /* Startseite ist beim Laden sichtbar */
         }
 
         iframe {
@@ -140,6 +145,12 @@
             const section = document.getElementById(sectionId);
             section.scrollIntoView({ behavior: 'smooth' });
 
+            // Alle Sections ausblenden
+            hideAllSections();
+
+            // Die angeklickte Section anzeigen
+            section.style.display = "block";
+
             // Den Zustand setzen, dass der Benutzer sich nun in einer Section befindet
             isInSection = true;
 
@@ -147,6 +158,14 @@
             setTimeout(() => {
                 isInSection = false;
             }, 1000); // Setzt isInSection nach 1 Sekunde zurück, du kannst diesen Wert anpassen
+        }
+
+        // Alle Sections ausblenden
+        function hideAllSections() {
+            const sections = document.querySelectorAll('main section');
+            sections.forEach(section => {
+                section.style.display = 'none';
+            });
         }
     </script>
 </head>
@@ -200,6 +219,13 @@
 
     <!-- Hauptbereich mit iFrames für die Satzungen -->
     <main>
+        <!-- Startseite Block -->
+        <section id="startseite">
+            <h2>Willkommen auf der Startseite</h2>
+            <p>Willkommen auf der offiziellen Webseite der AfD-Fraktion im Stadtrat Pirmasens. Wählen Sie aus den folgenden Optionen, um mehr zu erfahren.</p>
+        </section>
+
+        <!-- Weitere Sections werden hier eingeblendet, wenn der Benutzer darauf klickt -->
         <section id="kreissatzung">
             <h2>Kreissatzung</h2>
             <iframe src="Satzungen/Satzung_Kreis.pdf" width="100%" height="600px" style="border:none;"></iframe>
@@ -222,16 +248,4 @@
 
         <section id="schiedsordnung">
             <h2>Schiedsordnung</h2>
-            <iframe src="Satzungen/Schiedsordnung.pdf" width="100%" height="600px" style="border:none;"></iframe>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 AfD-Fraktion im Stadtrat Pirmasens. Alle Rechte vorbehalten.</p>
-        <p><a href="datenschutz.html">Datenschutz</a> | <a href="impressum.html">Impressum</a></p>
-    </footer>
-
-</body>
-
-</html>
+            <iframe src="Satzungen/Schiedsordnung.pdf" width="

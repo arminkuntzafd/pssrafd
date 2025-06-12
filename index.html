@@ -90,17 +90,12 @@
       display: block;
     }
 
-    main {
-      position: fixed;
-      top: 160px;
-      bottom: 60px;
-      left: 0;
-      right: 0;
-      overflow-y: auto;
-      padding: 20px;
-      background-color: #fff;
-    }
-
+   main {
+    margin-top: 160px; /* Platz für Header + Navigation */
+    margin-bottom: 60px; /* Platz für Footer */
+    padding: 20px;
+    background-color: #fff;
+}
     section {
       display: none;
       padding: 20px;
@@ -324,7 +319,7 @@
 
     <section id="kreissatzung">
       <h2>Kreissatzung</h2>
-      <iframe src="Satzungen/Satzung_Kreis.pdf"></iframe>
+      <iframe src="Satzungen/Satzung_Kreis.pdf"> style="width: 100%; height: 800px; border: none;"></iframe>
     </section>
 
     <section id="landessatzung">

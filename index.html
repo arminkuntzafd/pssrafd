@@ -221,6 +221,9 @@
       <div class="dropdown-item dropdown">
         <a href="https://www.google.com/maps/dir/?api=1&origin=YOUR_START_ADDRESS&destination=Lemberger+Str.+28,+Pirmasens" target="_blank">Routenplaner</a>
       </div>
+       <div class="dropdown-item dropdown">
+         <div class="dropdown-item"><a onclick="showSection('kontaktformular')">Kontaktformular</a></div>
+      </div>
     </div>
   </div>
 
@@ -376,7 +379,23 @@
            <iframe src="Satzungen/Bundestagswahlprogramm2025.pdf"></iframe>
     </section>
       
-    <section id="haushaltsrede2025">
+    <section id="kontaktformular">
+  <h2>Kontaktieren Sie uns</h2>
+  <form action="mailto:deine@email.de" method="post" enctype="text/plain" style="max-width: 600px; margin: auto;">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" required style="width: 100%; padding: 8px; margin-bottom: 10px;"><br>
+
+    <label for="email">E-Mail:</label><br>
+    <input type="email" id="email" name="email" required style="width: 100%; padding: 8px; margin-bottom: 10px;"><br>
+
+    <label for="nachricht">Nachricht:</label><br>
+    <textarea id="nachricht" name="nachricht" rows="6" required style="width: 100%; padding: 8px; margin-bottom: 10px;"></textarea><br>
+
+    <button type="submit" style="background-color: #002147; color: white; padding: 10px 20px; border: none; cursor: pointer;">Absenden</button>
+  </form>
+</section>
+
+      <section id="haushaltsrede2025">
             <iframe src="Bilder/PSHH25.pdf"></iframe>
     </section>
     

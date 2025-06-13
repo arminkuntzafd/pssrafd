@@ -111,7 +111,7 @@
     }
 
     #startseite img {
-      max-width: 100%;
+      max-width: 20%;
       height: auto;
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -182,6 +182,39 @@
 
   <div class="menu-item dropdown">
   <a href="#">Team</a>
+  <div class="dropdown-content">
+    <div class="dropdown-item"><a onclick="showSection('fraktion')">Fraktion</a></div>
+    <div class="dropdown-item"><a onclick="showSection('ausschüsse')">Ausschüsse</a></div>
+
+    <!-- Satzungen mit verschachtelter Struktur -->
+    <div class="dropdown-item dropdown">
+      <a href="#">Satzungen</a>
+      <div class="dropdown-content">
+        <div class="dropdown-item"><a onclick="showSection('kreissatzung')">Kreissatzung</a></div>
+        <div class="dropdown-item"><a onclick="showSection('landessatzung')">Landessatzung</a></div>
+        <div class="dropdown-item dropdown">
+          <a href="#">Bund</a>
+          <div class="dropdown-content">
+            <div class="dropdown-item"><a onclick="showSection('bundessatzung')">Bundessatzung</a></div>
+            <div class="dropdown-item dropdown">
+              <a href="#">Ordnungen</a>
+              <div class="dropdown-content">
+                <div class="dropdown-item"><a onclick="showSection('finanzordnung')">Finanzordnung</a></div>
+                <div class="dropdown-item"><a onclick="showSection('schiedsordnung')">Schiedsordnung</a></div>
+                <div class="dropdown-item"><a onclick="showSection('wahlordnung')">Wahlordnung</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="dropdown-item">
+        <div class="dropdown-item"><a onclick="showSection('programm')">Programm</a></div>
+      </div>
+  </div>
+</div>
+<div class="menu-item dropdown">
+  <a href="#">AfD</a>
   <div class="dropdown-content">
     <div class="dropdown-item"><a onclick="showSection('fraktion')">Fraktion</a></div>
     <div class="dropdown-item"><a onclick="showSection('ausschüsse')">Ausschüsse</a></div>

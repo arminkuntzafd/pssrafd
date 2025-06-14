@@ -244,7 +244,11 @@
       </div>
 
       <a onclick="showSection('programm')">Programm</a>
+      <a onclick="showSection('blog')">Blog</a>
     </div>
+  
+  
+  
   </div>
 
   <div class="menu-item dropdown">
@@ -419,9 +423,34 @@
   </form>
 </section>
 
-      <section id="haushaltsrede2025">
+<section id="blog">
+  <h2>Unser Blog</h2>
+  <!-- Beispiel-Teaser -->
+  <div class="blog-teaser" onclick="showBlogContent('teaser1')">
+    <h3>Blog Beitrag 1</h3>
+    <p>Kurze Zusammenfassung des Beitrags...</p>
+  </div>
+  <div class="blog-teaser" onclick="showBlogContent('teaser2')">
+    <h3>Blog Beitrag 2</h3>
+    <p>Kurze Zusammenfassung des Beitrags...</p>
+  </div>
+</section>
+      
+  <section id="blog-content" style="display:none;">
+  <button onclick="hideBlogContent()">Zurück</button>
+  <div id="blog-post-1" style="display:none;">
+    <h3>Blog Beitrag 1</h3>
+    <p>Hier ist der vollständige Inhalt des Beitrags 1...</p>
+  </div>
+  <div id="blog-post-2" style="display:none;">
+    <h3>Blog Beitrag 2</h3>
+    <p>Hier ist der vollständige Inhalt des Beitrags 2...</p>
+  </div>
+</section>    
+      
+<section id="haushaltsrede2025">
             <iframe src="Bilder/PSHH25.pdf"></iframe>
-    </section>
+</section>
     
     <section id="einschulungen">
             <iframe src="Anfragen/20240822 Einschulungen.pdf"></iframe>
@@ -519,6 +548,42 @@
         document.querySelector('main').scrollTop = 0;
       }
     }
+function showSection(sectionId) {
+  // Alle Sections ausblenden
+  const sections = document.querySelectorAll('main section');
+  sections.forEach(sec => sec.style.display = 'none');
+
+  // Gewählte Section anzeigen
+  document.getElementById(sectionId).style.display = 'block';
+
+  // Falls 'blog' angezeigt wird, verstecke 'blog-content'
+  if (sectionId === 'blog') {
+    document.getElementById('blog-content').style.display = 'none';
+  }
+}
+
+function showBlogContent(postId) {
+  // Alle Blog-Posts verstecken
+  document.querySelectorAll('#blog-content > div').forEach(div => div.style.display = 'none');
+
+  // Blog Content Section anzeigen
+  document.getElementById('blog-content').style.display = 'block';
+
+  // Gewählten Beitrag anzeigen
+  document.getElementById('blog-post-' + postId).style.display = 'block';
+
+  // Den Blog-Teaser Bereich ausblenden
+  document.getElementById('blog').style.display = 'none';
+}
+
+function hideBlogContent() {
+  // Blog-Content wieder ausblenden
+  document.getElementById('blog-content').style.display = 'none';
+
+  // Blog Teaser wieder anzeigen
+  document.getElementById('blog').style.display = 'block';
+}
+
   </script>
 </body>
 </html>

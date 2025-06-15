@@ -187,24 +187,33 @@
       }
     }
   
- #blog {
-  max-width: 80ch;
-  margin: auto;
-  padding: 20px;
-  line-height: 1.6;
-  height: auto; /* Dynamische Höhe anstatt einer festen max-height */
-  background-color: #f9f9f9;  /* Optional für bessere Lesbarkeit */
-  border-radius: 8px;         /* Optionales Styling */
-}
-
-#blog-content {
+ #blog, #blog-content {
   max-width: 80ch;
   margin: auto;
   padding: 20px;
   line-height: 1.6;
   background-color: #f9f9f9;
   border-radius: 8px;
-  height: auto; /* Sicherstellen, dass auch der Inhalt des Blogs vollständig angezeigt wird */
+  overflow-y: auto; /* Ermöglicht vertikales Scrollen */
+}
+
+#blog-content {
+  max-height: 80vh; /* Setze die maximale Höhe auf 80% der Viewport-Höhe */
+  display: none; /* Zunächst ausgeblendet, wird bei Blog-Content angezeigt */
+}
+
+#blog {
+  min-height: 300px; /* Mindesthöhe für den Blog-Bereich */
+}
+
+#blog ul {
+  padding-left: 20px;
+  list-style-type: none;
+}
+
+#blog ul li {
+  margin-bottom: 10px;
+  cursor: pointer;
 }
 
       

@@ -187,33 +187,24 @@
       }
     }
   
- #blog, #blog-content {
+ #blog {
+  max-width: 80ch;
+  margin: auto;
+  padding: 20px;
+  line-height: 1.6;
+  height: auto; /* Dynamische Höhe anstatt einer festen max-height */
+  background-color: #f9f9f9;  /* Optional für bessere Lesbarkeit */
+  border-radius: 8px;         /* Optionales Styling */
+}
+
+#blog-content {
   max-width: 80ch;
   margin: auto;
   padding: 20px;
   line-height: 1.6;
   background-color: #f9f9f9;
   border-radius: 8px;
-  overflow-y: auto; /* Ermöglicht vertikales Scrollen */
-}
-
-#blog-content {
-  max-height: 80vh; /* Setze die maximale Höhe auf 80% der Viewport-Höhe */
-  display: none; /* Zunächst ausgeblendet, wird bei Blog-Content angezeigt */
-}
-
-#blog {
-  min-height: 300px; /* Mindesthöhe für den Blog-Bereich */
-}
-
-#blog ul {
-  padding-left: 20px;
-  list-style-type: none;
-}
-
-#blog ul li {
-  margin-bottom: 10px;
-  cursor: pointer;
+  height: auto; /* Sicherstellen, dass auch der Inhalt des Blogs vollständig angezeigt wird */
 }
 
       
@@ -592,7 +583,33 @@ Die Diskussion über die Integration der Kinder mit Migrationshintergrund in den
 
 
   <script>
-    function showBlogContent(postId) {
+    function showSection(sectionId) {
+      document.querySelectorAll('main section').forEach(sec => {
+        sec.style.display = 'none';
+      });
+
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.style.display = 'block';
+        // main scrollt bei wechsel nach oben
+        document.querySelector('main').scrollTop = 0;
+      }
+    }
+function showSection(sectionId) {
+  // Alle Sections ausblenden
+  const sections = document.querySelectorAll('main section');
+  sections.forEach(sec => sec.style.display = 'none');
+
+  // Gewählte Section anzeigen
+  document.getElementById(sectionId).style.display = 'block';
+
+  // Falls 'blog' angezeigt wird, verstecke 'blog-content'
+  if (sectionId === 'blog') {
+    document.getElementById('blog-content').style.display = 'none';
+  }
+}
+
+function showBlogContent(postId) {
   // Alle Blog-Posts verstecken
   document.querySelectorAll('#blog-content > div').forEach(div => div.style.display = 'none');
 
@@ -605,6 +622,15 @@ Die Diskussion über die Integration der Kinder mit Migrationshintergrund in den
   // Den Blog-Teaser Bereich ausblenden
   document.getElementById('blog').style.display = 'none';
 }
+
+function hideBlogContent() {
+  // Blog-Content wieder ausblenden
+  document.getElementById('blog-content').style.display = 'none';
+
+  // Blog Teaser wieder anzeigen
+  document.getElementById('blog').style.display = 'block';
+}
+
   </script>
 </body>
 </html>  

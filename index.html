@@ -233,7 +233,9 @@
   <div id="datetime" style="text-align: right; position: absolute; right: 20px; top: 20px; font-size: 1rem;">
   <div id="datum"></div>
   <div id="uhrzeit" style="font-size: 0.9rem;"></div>
-</div>
+  <div id="wetter" style="margin-top: 5px; font-size: 0.9rem;"></div>
+
+  </div>
   
   </header>
 
@@ -658,6 +660,53 @@ function updateDateTime() {
 
   setInterval(updateDateTime, 1000);
   updateDateTime(); // Direkt aufrufen beim Laden
+  
+  async function ladeWetter() {
+  const lat = 49.201;  // Koordinaten für Pirmasens
+  const lon = 7.605;
+
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    const wetter = data.current_weather;
+
+    const temperatur = Math.round(wetter.temperature);
+    const zustand = wetter.weathercode;
+
+    const beschreibung = wetterBeschreibung(zustand);
+
+    document.getElementById('wetter').textContent = `${beschreibung} ${temperatur}°C`;
+  } catch (error) {
+    console.error("Wetter konnte nicht geladen werden:", error);
+  }
+}
+
+function wetterBeschreibung(code) {
+  const mapping = {
+    0: "Klar",
+    1: "Überwiegend klar",
+    2: "Teilweise bewölkt",
+    3: "Bewölkt",
+    45: "Nebel",
+    48: "Nebelig",
+    51: "Leichter Nieselregen",
+    53: "Mäßiger Nieselregen",
+    55: "Starker Nieselregen",
+    61: "Leichter Regen",
+    63: "Mäßiger Regen",
+    65: "Starker Regen",
+    80: "Regenschauer",
+    95: "Gewitter"
+  };
+
+  return mapping[code] || "Wetter unbekannt";
+}
+
+ladeWetter();
+
+  
   </script>
 </body>
 </html>  

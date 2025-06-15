@@ -229,6 +229,12 @@
       <h1 style="margin: 0;">AfD-Fraktion im Stadtrat Pirmasens</h1>
       <p style="margin: 5px 0 0;">Wir setzen uns für Ihre Interessen ein!</p>
     </div>
+  
+  <div id="datetime" style="text-align: right; position: absolute; right: 20px; top: 20px; font-size: 1rem;">
+  <div id="datum"></div>
+  <div id="uhrzeit" style="font-size: 0.9rem;"></div>
+</div>
+  
   </header>
 
  <nav>
@@ -639,7 +645,19 @@ function hideBlogContent() {
   // Blog Teaser wieder anzeigen
   document.getElementById('blog').style.display = 'block';
 }
+function updateDateTime() {
+    const jetzt = new Date();
+    const tage = ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'];
+    const tag = tage[jetzt.getDay()];
+    const datum = `${tag} ${jetzt.toLocaleDateString('de-DE')}`;
+    const uhrzeit = jetzt.toLocaleTimeString('de-DE');
 
+    document.getElementById('datum').textContent = datum;
+    document.getElementById('uhrzeit').textContent = uhrzeit;
+  }
+
+  setInterval(updateDateTime, 1000);
+  updateDateTime(); // Direkt aufrufen beim Laden
   </script>
 </body>
 </html>  

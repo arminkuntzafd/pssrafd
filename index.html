@@ -187,15 +187,24 @@
       }
     }
   
-  #blog, #blog-content {
+ #blog {
   max-width: 80ch;
   margin: auto;
   padding: 20px;
   line-height: 1.6;
-  max-height: 80vh;           /* Feste Höhe */
-  overflow-y: auto;           /* Vertikales Scrollen */
+  height: auto; /* Dynamische Höhe anstatt einer festen max-height */
   background-color: #f9f9f9;  /* Optional für bessere Lesbarkeit */
   border-radius: 8px;         /* Optionales Styling */
+}
+
+#blog-content {
+  max-width: 80ch;
+  margin: auto;
+  padding: 20px;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  height: auto; /* Sicherstellen, dass auch der Inhalt des Blogs vollständig angezeigt wird */
 }
 
       

@@ -702,7 +702,12 @@ function wetterBeschreibung(code) {
   };
 
   return mapping[code] || "Wetter unbekannt";
-}
+
+ladeWetter();
+setInterval(ladeWetter, 600000);
+
+    
+    }
 
 ladeWetter();
 

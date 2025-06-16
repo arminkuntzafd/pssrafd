@@ -456,7 +456,7 @@
           <a onclick="showSection('kalender')">Stadtratsfraktion</a>
           <a href="https://rip.stadt-pirmasens.de/bi/info.asp" target="_blank">Bürgerinfo</a>
           <a href="https://alternative-rlp.de/veranstaltungenafdrlp" target="_blank">AfD RLP</a>
-        </div>
+        </div>k
       </div>
       <a onclick="showSection('impressum')">Impressum</a>
       <a onclick="showSection('datenschutzerklärung')">Datenschutz</a>
@@ -773,7 +773,18 @@ Der Kreisverband blickt optimistisch auf den bevorstehenden Landtagswahlkampf. M
 
 
   <script>
-    
+    function showSection(sectionId) {
+      document.querySelectorAll('main section').forEach(sec => {
+        sec.style.display = 'none';
+      });
+
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.style.display = 'block';
+        // main scrollt bei wechsel nach oben
+        document.querySelector('main').scrollTop = 0;
+      }
+    }
 function showSection(sectionId) {
   // Alle Sections ausblenden
   const sections = document.querySelectorAll('main section');

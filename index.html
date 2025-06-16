@@ -189,7 +189,7 @@
   
  #blog, #blog-content {
   max-width: 100ch;
-  height: 800px
+  height; 800px
    margin: auto;
   padding: 20px;
   line-height: 1.6;
@@ -766,15 +766,19 @@ Der Kreisverband blickt optimistisch auf den bevorstehenden Landtagswahlkampf. M
    
  <footer>
   <p>&copy; 2025 AfD-Fraktion im Stadtrat Pirmasens. Alle Rechte vorbehalten</p>
-  <p>
-    <a href="#" onclick="showSection('impressum')">Impressum</a> |
+    <a href="#" onclick="showSection('impressum')">Impressum</a> | 
     <a href="#" onclick="showSection('datenschutzerklärung')">Datenschutz</a>
-  </p>
-</footer>
+</p>
+ </footer>
 
 
   <script>
-          const section = document.getElementById(sectionId);
+    function showSection(sectionId) {
+      document.querySelectorAll('main section').forEach(sec => {
+        sec.style.display = 'none';
+      });
+
+      const section = document.getElementById(sectionId);
       if (section) {
         section.style.display = 'block';
         // main scrollt bei wechsel nach oben

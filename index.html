@@ -837,144 +837,160 @@ Der Kreisverband blickt optimistisch auf den bevorstehenden Landtagswahlkampf. M
 
 
   <script>
-    function showSection(sectionId) {
-      document.querySelectorAll('main section').forEach(sec => {
-        sec.style.display = 'none';
-      });
+/* ---------- Section‑Umschalter ---------- */
+function showSection(id){
+  document.querySelectorAll('main section').forEach(s=>s.style.display='none');
+  const sec=document.getElementById(id);
+  if(sec){sec.style.display='block';document.querySelector('main').scrollTop=0;}
+  if(id==='blog'){ document.getElementById('blog-content').style.display='none'; }
+}
 
-      const section = document.getElementById(sectionId);
-      if (section) {
-        section.style.display = 'block';
-        // main scrollt bei wechsel nach oben
-        document.querySelector('main').scrollTop = 0;
-      }
-    }
-function showSection(sectionId) {
-  // Alle Sections ausblenden
-  const sections = document.querySelectorAll('main section');
-  sections.forEach(sec => sec.style.display = 'none');
+/* ---------- Blog‑Wechsel ---------- */
+function showBlogContent(n){
+  document.querySelectorAll('#blog-content > div').forEach(d=>d.style.display='none');
+  document.getElementById('blog-content').style.display='block';
+  document.getElementById('blog-post-'+n).style.display='block';
+  document.getElementById('blog').style.display='none';
+}
+function hideBlogContent(){
+  document.getElementById('blog-content').style.display='none';
+  document.getElementById('blog').style.display='block';
+}
 
-  // Gewählte Section anzeigen
-  document.getElementById(sectionId).style.display = 'block';
+/* ---------- Datum & Uhrzeit ---------- */
+function updateDateTime(){
+  const d=new Date();
+  const tage=['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
+  document.getElementById('datum').textContent =
+        `${tage[d.getDay()]} ${d.toLocaleDateString('de-DE')}`;
+  document.getElementById('uhrzeit').textContent = d.toLocaleTimeString('de-DE');
+}
+updateDateTime();                    // sofort anzeigen
+setInterval(updateDateTime,1000);    // jede Sekunde aktualisieren
 
-  // Falls 'blog' angezeigt wird, verstecke 'blog-content'
-  if (sectionId === 'blog') {
-    document.getElementById('blog-content').style.display = 'none';
+/* ---------- Wetter ---------- */
+async function ladeWetter(){
+  const lat=49.201, lon=7.605; // Koordinaten Pirmasens
+  const url=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code`;
+
+  try{
+    const res=await fetch(url);
+    const data=await res.json();
+    const w=data.current;
+    const temp=Math.round(w.temperature_2m);
+    document.getElementById('wetter').textContent =
+      `${wetterBeschreibung(w.weather_code)} ${temp}°C`;
+  }catch(e){
+    console.error('Wetter konnte nicht geladen werden:',e);
+    document.getElementById('wetter').textContent='Wetter: --°C';
   }
 }
-
-function showBlogContent(postId) {
-  // Alle Blog-Posts verstecken
-  document.querySelectorAll('#blog-content > div').forEach(div => div.style.display = 'none');
-
-  // Blog Content Section anzeigen
-  document.getElementById('blog-content').style.display = 'block';
-
-  // Gewählten Beitrag anzeigen
-  document.getElementById('blog-post-' + postId).style.display = 'block';
-
-  // Den Blog-Teaser Bereich ausblenden
-  document.getElementById('blog').style.display = 'none';
+function wetterBeschreibung(code){
+  const map={0:'Klar',1:'Überw. klar',2:'Teilw. bewölkt',3:'Bewölkt',45:'Nebel',48:'Nebelig',
+             51:'L. Niesel',53:'M. Niesel',55:'St. Niesel',61:'L. Regen',63:'M. Regen',
+             65:'St. Regen',80:'Schauer',95:'Gewitter'};
+  return map[code]||'Unbek.';
 }
+ladeWetter();                     // sofort abrufen
+setInterval(ladeWetter,60000);    // alle 60 s neu
 
-function hideBlogContent() {
-  // Blog-Content wieder ausblenden
-  document.getElementById('blog-content').style.display = 'none';
-
-  // Blog Teaser wieder anzeigen
-  document.getElementById('blog').style.display = 'block';
+/* ---------- Schlaf‑Reminder (bleibt unverändert) ---------- */
+function showSleepReminder(){
+  const modal=document.getElementById('sleepModal');
+  modal.style.display='flex';
+  document.getElementById('closeModal').onclick=()=>{ modal.style.display='none'; };
 }
-function updateDateTime() {
-    const jetzt = new Date();
-    const tage = ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'];
-    const tag = tage[jetzt.getDay()];
-    const datum = `${tag} ${jetzt.toLocaleDateString('de-DE')}`;
-    const uhrzeit = jetzt.toLocaleTimeString('de-DE');
-
-    document.getElementById('datum').textContent = datum;
-    document.getElementById('uhrzeit').textContent = uhrzeit;
- 
-
-  setInterval(updateDateTime, 1000);
-  updateDateTime(); // Direkt aufrufen beim Laden
-  
-  async function ladeWetter() {
-  const lat = 49.201;  // Koordinaten für Pirmasens
-  const lon = 7.605;
-
-  const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
-
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    const wetter = data.current_weather;
-
-    const temperatur = Math.round(wetter.temperature);
-    const zustand = wetter.weathercode;
-
-    const beschreibung = wetterBeschreibung(zustand);
-
-    document.getElementById('wetter').textContent = `${beschreibung} ${temperatur}°C`;
-  } catch (error) {
-    console.error("Wetter konnte nicht geladen werden:", error);
-  }
-}
-
-function wetterBeschreibung(code) {
-  const mapping = {
-    0: "Klar",
-    1: "Überwiegend klar",
-    2: "Teilweise bewölkt",
-    3: "Bewölkt",
-    45: "Nebel",
-    48: "Nebelig",
-    51: "Leichter Nieselregen",
-    53: "Mäßiger Nieselregen",
-    55: "Starker Nieselregen",
-    61: "Leichter Regen",
-    63: "Mäßiger Regen",
-    65: "Starker Regen",
-    80: "Regenschauer",
-    95: "Gewitter"
-  };
-
-  return mapping[code] || "Wetter unbekannt";
-
-ladeWetter();
-setInterval(ladeWetter, 60000);
-
-    
-   
-
-ladeWetter();
-
-  function showSleepReminder() {
-  const modal = document.getElementById("sleepModal");
-  modal.style.display = "flex";
-
-  document.getElementById("closeModal").addEventListener("click", () => {
-    modal.style.display = "none";
-  });
-}
-
-// Prüfe alle 30 Sekunden, ob es 2 Uhr ist
-setInterval(() => {
-  const now = new Date();
-  const hours = now.getHours();
-  const minutes = now.getMinutes();
-
-  // Zeige das Modal nur zwischen 2:00 und 2:01 Uhr, einmalig pro Tag
-  if (hours === 2 && minutes === 0) {
-    if (!sessionStorage.getItem("sleepPopupShown")) {
+// Prüft alle 30 s auf 02:00 Uhr
+setInterval(()=>{
+  const now=new Date();
+  if(now.getHours()===2 && now.getMinutes()===0){
+    if(!sessionStorage.getItem('sleepPopupShown')){
       showSleepReminder();
-      sessionStorage.setItem("sleepPopupShown", "true");
+      sessionStorage.setItem('sleepPopupShown','true');
     }
-  } else {
-    // Reset für nächsten Tag
-    sessionStorage.removeItem("sleepPopupShown");
+  }else{
+    sessionStorage.removeItem('sleepPopupShown');
   }
-}, 30000); // alle 30 Sekunden prüfen
+},30000);
+</script>
+<script>
+/* ---------- Section‑Umschalter ---------- */
+function showSection(id){
+  document.querySelectorAll('main section').forEach(s=>s.style.display='none');
+  const sec=document.getElementById(id);
+  if(sec){sec.style.display='block';document.querySelector('main').scrollTop=0;}
+  if(id==='blog'){ document.getElementById('blog-content').style.display='none'; }
+}
 
-  </script>
+/* ---------- Blog‑Wechsel ---------- */
+function showBlogContent(n){
+  document.querySelectorAll('#blog-content > div').forEach(d=>d.style.display='none');
+  document.getElementById('blog-content').style.display='block';
+  document.getElementById('blog-post-'+n).style.display='block';
+  document.getElementById('blog').style.display='none';
+}
+function hideBlogContent(){
+  document.getElementById('blog-content').style.display='none';
+  document.getElementById('blog').style.display='block';
+}
+
+/* ---------- Datum & Uhrzeit ---------- */
+function updateDateTime(){
+  const d=new Date();
+  const tage=['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
+  document.getElementById('datum').textContent =
+        `${tage[d.getDay()]} ${d.toLocaleDateString('de-DE')}`;
+  document.getElementById('uhrzeit').textContent = d.toLocaleTimeString('de-DE');
+}
+updateDateTime();                    // sofort anzeigen
+setInterval(updateDateTime,1000);    // jede Sekunde aktualisieren
+
+/* ---------- Wetter ---------- */
+async function ladeWetter(){
+  const lat=49.201, lon=7.605; // Koordinaten Pirmasens
+  const url=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code`;
+
+  try{
+    const res=await fetch(url);
+    const data=await res.json();
+    const w=data.current;
+    const temp=Math.round(w.temperature_2m);
+    document.getElementById('wetter').textContent =
+      `${wetterBeschreibung(w.weather_code)} ${temp}°C`;
+  }catch(e){
+    console.error('Wetter konnte nicht geladen werden:',e);
+    document.getElementById('wetter').textContent='Wetter: --°C';
+  }
+}
+function wetterBeschreibung(code){
+  const map={0:'Klar',1:'Überw. klar',2:'Teilw. bewölkt',3:'Bewölkt',45:'Nebel',48:'Nebelig',
+             51:'L. Niesel',53:'M. Niesel',55:'St. Niesel',61:'L. Regen',63:'M. Regen',
+             65:'St. Regen',80:'Schauer',95:'Gewitter'};
+  return map[code]||'Unbek.';
+}
+ladeWetter();                     // sofort abrufen
+setInterval(ladeWetter,60000);    // alle 60 s neu
+
+/* ---------- Schlaf‑Reminder (bleibt unverändert) ---------- */
+function showSleepReminder(){
+  const modal=document.getElementById('sleepModal');
+  modal.style.display='flex';
+  document.getElementById('closeModal').onclick=()=>{ modal.style.display='none'; };
+}
+// Prüft alle 30 s auf 02:00 Uhr
+setInterval(()=>{
+  const now=new Date();
+  if(now.getHours()===2 && now.getMinutes()===0){
+    if(!sessionStorage.getItem('sleepPopupShown')){
+      showSleepReminder();
+      sessionStorage.setItem('sleepPopupShown','true');
+    }
+  }else{
+    sessionStorage.removeItem('sleepPopupShown');
+  }
+},30000);
+</script>
+
+
 </body>
 </html>  
